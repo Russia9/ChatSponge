@@ -1,0 +1,17 @@
+[
+    {
+        "modid": "chatsponge",
+        "name": "ChatSponge",
+        "version": "0.4.7",
+        "description": "Amazing EpicCraft chat plugin",
+        "authorList": [
+            "Russia9"
+        ],
+        "dependencies": [
+            "spongeapi@7.1.0"
+        ],
+        "requiredMods": [
+            "spongeapi@7.1.0"
+        ]
+    }
+]
