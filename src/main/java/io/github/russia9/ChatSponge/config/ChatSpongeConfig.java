@@ -42,9 +42,14 @@ public class ChatSpongeConfig {
     public final String noAllowChat = "[&4Epic&6Craft&7] &cИзвините, но у вас нет прав на написание сообщений здесь";
     @Setting("Enabled")
     public boolean enable = true;
+
+    public String prefix = "&7[&4Epic&6Craft&7] ";
+
     public TextTemplate privateMessageReceiver = of(
             TextColors.GOLD, TextSerializers.FORMATTING_CODE.deserialize(" &6["), arg("nick"), TextSerializers.FORMATTING_CODE.deserialize("&6 -> &cЯ&6] "), TextColors.RESET, arg("message"));
+
     public TextTemplate privateMessageSpy = of(
             TextColors.GOLD, TextSerializers.FORMATTING_CODE.deserialize(" &6[&eSS&6]"), arg("sender"), TextSerializers.FORMATTING_CODE.deserialize("&6 -> "), arg("receiver"), TextSerializers.FORMATTING_CODE.deserialize("&6] "), TextColors.RESET, arg("message"));
-    public String console = "&7[&4Epic&6Craft&7] &cConsole";
+
+    public String console = "&7[&4Epic&6Craft&7] &cConsole&r";
 }

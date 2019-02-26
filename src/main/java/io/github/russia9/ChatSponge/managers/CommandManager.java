@@ -39,7 +39,7 @@ public class CommandManager {
                 .arguments(
                         GenericArguments.onlyOne(GenericArguments.text(Text.of("text"), TextSerializers.FORMATTING_CODE, true))
                 )
-                .executor(new MeCommand())
+                .executor(new MeCommand(plugin))
                 .build();
         msg = CommandSpec.builder()
                 .description(Text.of("Отправка личного сообщения игроку player."))

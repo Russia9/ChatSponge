@@ -46,7 +46,7 @@ public class MsgCommand implements CommandExecutor {
                 receiver.sendMessage(receiverMessage);
                 spy.send(spyMessage);
             } else {
-                sender.sendMessage(TextSerializers.FORMATTING_CODE.deserialize("&7[&4Epic&6Craft&7] &cНельзя отправить сообщение самому себе."));
+                sender.sendMessage(TextSerializers.FORMATTING_CODE.deserialize(plugin.getChatSpongeConfig().prefix + "&cНельзя отправить сообщение самому себе."));
             }
         } else {
             Player receiver = args.<Player>getOne(Text.of("receiver")).get();

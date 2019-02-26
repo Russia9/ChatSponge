@@ -30,11 +30,11 @@ public class ClearCommand implements CommandExecutor {
         Optional<Player> player = args.getOne("player");
         if (player.isPresent()) {
             player.get().sendMessage(Text.of("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"));
-            player.get().sendMessage(TextSerializers.FORMATTING_CODE.deserialize("&7 [&4Epic&6Craft&7] &fВаш чат был&c очищен."));
+            player.get().sendMessage(TextSerializers.FORMATTING_CODE.deserialize(plugin.getChatSpongeConfig().prefix + "&fВаш чат был&c очищен."));
             MessageChannel.TO_CONSOLE.send(TextSerializers.FORMATTING_CODE.deserialize(TextSerializers.FORMATTING_CODE.serialize(Helper.getNick(player.get())) + " &fchat cleared"));
         } else {
             MessageChannel.TO_PLAYERS.send(Text.of("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"));
-            MessageChannel.TO_PLAYERS.send(TextSerializers.FORMATTING_CODE.deserialize("&7 [&4Epic&6Craft&7] &fЧат был&c очищен."));
+            MessageChannel.TO_PLAYERS.send(TextSerializers.FORMATTING_CODE.deserialize(plugin.getChatSpongeConfig().prefix + "&fЧат был&c очищен."));
             MessageChannel.TO_CONSOLE.send(TextSerializers.FORMATTING_CODE.deserialize("&cAll &fchat cleared"));
         }
         return CommandResult.success();
