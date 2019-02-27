@@ -16,6 +16,7 @@ import java.util.Optional;
 
 /**
  * /chat clear command
+ * Clears chat.
  * Aliases: /chat clear /chat cl /chat c
  */
 public class ClearCommand implements CommandExecutor {

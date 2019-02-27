@@ -10,6 +10,7 @@ import org.spongepowered.api.text.serializer.TextSerializers;
 
 /**
  * /spy command
+ * Command to spy messages sended with /m command.
  * Aliases: /socialspy /spy
  */
 public class SpyCommand implements CommandExecutor {

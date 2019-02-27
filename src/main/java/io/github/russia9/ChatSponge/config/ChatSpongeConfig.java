@@ -9,6 +9,9 @@ import org.spongepowered.api.text.serializer.TextSerializers;
 import static org.spongepowered.api.text.TextTemplate.arg;
 import static org.spongepowered.api.text.TextTemplate.of;
 
+/**
+ * ChatSponge plugin configuration.
+ */
 @ConfigSerializable
 public class ChatSpongeConfig {
     @Setting("Ranged mode")

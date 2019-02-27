@@ -13,6 +13,7 @@ import org.spongepowered.api.text.serializer.TextSerializers;
 
 /**
  * /me command
+ * Send message like " * Russia9 Example".
  * Aliases: /me /action /describe
  */
 public class MeCommand implements CommandExecutor {
