@@ -33,6 +33,27 @@ public class CommandManager {
      * @param plugin ChatSponge plugin instance
      */
     private void initCommands(ChatSponge plugin) {
+        /* /chat subcommands */
+        CommandSpec clear = CommandSpec.builder()
+                .description(Text.of("Очищает чат."))
+                .permission("chatsponge.command.chat.clear")
+                .arguments(
+                        GenericArguments.optional(GenericArguments.player(Text.of("player")))
+                )
+                .executor(new ClearCommand(plugin))
+                .build();
+        CommandSpec guard = CommandSpec.builder()
+                .description(Text.of("Команда управления ChatGuard."))
+                .permission("chatsponge.command.chat.guard")
+                .build();
+        chat = CommandSpec.builder()
+                .description(Text.of("Команда управления чатом."))
+                .permission("chatsponge.command.chat.command")
+                .child(clear, "clear", "c", "cl")
+                .child(guard, "guard", "cg")
+                .build();
+
+        /* separate commands */
         me = CommandSpec.builder()
                 .description(Text.of("Сообщает об исполнителе команды от третьего лица."))
                 .permission("chatsponge.command.me")
@@ -49,19 +70,6 @@ public class CommandManager {
                         GenericArguments.onlyOne(GenericArguments.remainingRawJoinedStrings(Text.of("text")))
                 )
                 .executor(new MsgCommand(plugin))
-                .build();
-        CommandSpec clear = CommandSpec.builder()
-                .description(Text.of("Очищает чат."))
-                .permission("chatsponge.command.chat.clear")
-                .arguments(
-                        GenericArguments.optional(GenericArguments.player(Text.of("player")))
-                )
-                .executor(new ClearCommand(plugin))
-                .build();
-        chat = CommandSpec.builder()
-                .description(Text.of("Команда управления чатом."))
-                .permission("chatsponge.command.chat.command")
-                .child(clear, "clear", "c", "cl")
                 .build();
         spy = CommandSpec.builder()
                 .description(Text.of("Переключение трансляции личных сообщений всех игроков себе"))
