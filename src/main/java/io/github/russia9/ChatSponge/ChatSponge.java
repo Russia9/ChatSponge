@@ -27,7 +27,7 @@ import java.io.File;
 @Plugin(
         id = "chatsponge",
         name = "ChatSponge",
-        version = "0.4.7", //0.4.6
+        version = "0.5-indev",
         description = "Amazing EpicCraft chat plugin",
         authors = "Russia9")
 public class ChatSponge {
