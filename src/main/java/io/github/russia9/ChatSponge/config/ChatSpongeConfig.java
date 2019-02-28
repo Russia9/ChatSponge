@@ -45,6 +45,7 @@ public class ChatSpongeConfig {
     public final String noAllowChat = "[&4Epic&6Craft&7] &cИзвините, но у вас нет прав на написание сообщений здесь";
     @Setting("Enabled")
     public boolean enable = true;
+    public boolean enableCG = true;
 
     public String prefix = "&7[&4Epic&6Craft&7] ";
 

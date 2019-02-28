@@ -1,5 +1,6 @@
 package io.github.russia9.ChatSponge;
 
+import io.github.russia9.ChatSponge.chatguard.ChatGuard;
 import io.github.russia9.ChatSponge.config.ChatSpongeConfig;
 import io.github.russia9.ChatSponge.config.ConfigLoader;
 import io.github.russia9.ChatSponge.managers.CommandManager;
@@ -40,6 +41,7 @@ public class ChatSponge {
     private ConfigLoader configLoader;
     private CommandManager commandManager;
     private ChatSpongeConfig chatSpongeConfig;
+    private ChatGuard chatGuard;
 
     @Inject
     public ChatSponge(@ConfigDir(sharedRoot = false) File configDir, GuiceObjectMapperFactory factory) {
@@ -56,6 +58,7 @@ public class ChatSponge {
 
     @Listener
     public void onGameInit(GameInitializationEvent event) {
+        chatGuard = new ChatGuard(this, chatSpongeConfig.enableCG);
         Sponge.getEventManager().registerListeners(this, new ChatListener(this));
         commandManager = new CommandManager(this);
         logger.info("§aChatSponge§e init");
@@ -97,5 +100,9 @@ public class ChatSponge {
 
     public Game getGame() {
         return game;
+    }
+
+    public ChatGuard getChatGuard() {
+        return chatGuard;
     }
 }

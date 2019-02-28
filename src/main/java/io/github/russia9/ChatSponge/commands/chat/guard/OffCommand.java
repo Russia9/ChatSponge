@@ -25,6 +25,7 @@ public class OffCommand implements CommandExecutor {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         if (src instanceof Player) {
+            plugin.getChatGuard().setEnable(false);
             src.sendMessage(TextSerializers.FORMATTING_CODE.deserialize("&eChatGuard &coff"));
         }
         MessageChannel.TO_CONSOLE.send(TextSerializers.FORMATTING_CODE.deserialize("&eChatGuard &coff"));

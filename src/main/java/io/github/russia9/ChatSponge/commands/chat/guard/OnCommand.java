@@ -26,6 +26,7 @@ public class OnCommand implements CommandExecutor {
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         if (src instanceof Player) {
             src.sendMessage(TextSerializers.FORMATTING_CODE.deserialize("&eChatGuard &aon"));
+            plugin.getChatGuard().setEnable(true);
         }
         MessageChannel.TO_CONSOLE.send(TextSerializers.FORMATTING_CODE.deserialize("&eChatGuard &aon"));
         return CommandResult.success();
