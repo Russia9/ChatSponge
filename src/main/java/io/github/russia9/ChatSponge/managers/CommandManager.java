@@ -5,6 +5,8 @@ import io.github.russia9.ChatSponge.commands.MeCommand;
 import io.github.russia9.ChatSponge.commands.MsgCommand;
 import io.github.russia9.ChatSponge.commands.SpyCommand;
 import io.github.russia9.ChatSponge.commands.chat.ClearCommand;
+import io.github.russia9.ChatSponge.commands.chat.guard.OffCommand;
+import io.github.russia9.ChatSponge.commands.chat.guard.OnCommand;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
@@ -34,6 +36,23 @@ public class CommandManager {
      */
     private void initCommands(ChatSponge plugin) {
         /* /chat subcommands */
+        CommandSpec on = CommandSpec.builder()
+                .description(Text.of("Turns CG on"))
+                .permission("chatsponge.command.chat.guard.on")
+                .executor(new OnCommand(plugin))
+                .build();
+        CommandSpec off = CommandSpec.builder()
+                .description(Text.of("Turns CG off"))
+                .permission("chatsponge.command.chat.guard.off")
+                .executor(new OffCommand(plugin))
+                .build();
+        CommandSpec guard = CommandSpec.builder()
+                .description(Text.of("Команда управления ChatGuard."))
+                .permission("chatsponge.command.chat.guard")
+                .child(on, "on")
+                .child(off, "off")
+                .build();
+
         CommandSpec clear = CommandSpec.builder()
                 .description(Text.of("Очищает чат."))
                 .permission("chatsponge.command.chat.clear")
@@ -42,10 +61,7 @@ public class CommandManager {
                 )
                 .executor(new ClearCommand(plugin))
                 .build();
-        CommandSpec guard = CommandSpec.builder()
-                .description(Text.of("Команда управления ChatGuard."))
-                .permission("chatsponge.command.chat.guard")
-                .build();
+
         chat = CommandSpec.builder()
                 .description(Text.of("Команда управления чатом."))
                 .permission("chatsponge.command.chat.command")
