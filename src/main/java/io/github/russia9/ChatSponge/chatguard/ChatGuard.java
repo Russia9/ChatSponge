@@ -37,6 +37,17 @@ public class ChatGuard {
         return TextSerializers.PLAIN.deserialize(verify(verifed, player));
     }
 
+    private String replace(String string, String target, String replacement) {
+        string = string.replace(target, replacement);
+        target = target.replace("x", "х");
+        string = string.replace(target, replacement);
+        target = target.replace("y", "у");
+        string = string.replace(target, replacement);
+        target = target.replace("c", "с");
+        string = string.replace(target, replacement);
+        return string;
+    }
+
     public void setEnable(boolean enable) {
         this.enable = enable;
     }
