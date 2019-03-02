@@ -37,13 +37,30 @@ public class CommandManager {
     private void initCommands(ChatSponge plugin) {
         /* /chat subcommands */
         CommandSpec on = CommandSpec.builder()
-                .description(Text.of("Turns CG on"))
+                .description(Text.of("Turns CG on."))
                 .permission("chatsponge.command.chat.guard.on")
                 .executor(new OnCommand(plugin))
                 .build();
         CommandSpec off = CommandSpec.builder()
-                .description(Text.of("Turns CG off"))
+                .description(Text.of("Turns CG off."))
                 .permission("chatsponge.command.chat.guard.off")
+                .executor(new OffCommand(plugin))
+                .build();
+        CommandSpec add = CommandSpec.builder()
+                .description(Text.of("Adds <word> to the banned list."))
+                .permission("chatsponge.command.chat.guard.add")
+                .arguments(GenericArguments.onlyOne(GenericArguments.string(Text.of("word"))))
+                .executor(new OffCommand(plugin))
+                .build();
+        CommandSpec remove = CommandSpec.builder()
+                .description(Text.of("Removes <word> from the banned list."))
+                .permission("chatsponge.command.chat.guard.remove")
+                .arguments(GenericArguments.onlyOne(GenericArguments.string(Text.of("word"))))
+                .executor(new OffCommand(plugin))
+                .build();
+        CommandSpec list = CommandSpec.builder()
+                .description(Text.of("Shows list of banned words."))
+                .permission("chatsponge.command.chat.guard.list")
                 .executor(new OffCommand(plugin))
                 .build();
         CommandSpec guard = CommandSpec.builder()
