@@ -5,8 +5,7 @@ import io.github.russia9.ChatSponge.commands.MeCommand;
 import io.github.russia9.ChatSponge.commands.MsgCommand;
 import io.github.russia9.ChatSponge.commands.SpyCommand;
 import io.github.russia9.ChatSponge.commands.chat.ClearCommand;
-import io.github.russia9.ChatSponge.commands.chat.guard.OffCommand;
-import io.github.russia9.ChatSponge.commands.chat.guard.OnCommand;
+import io.github.russia9.ChatSponge.commands.chat.guard.*;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
@@ -37,37 +36,40 @@ public class CommandManager {
     private void initCommands(ChatSponge plugin) {
         /* /chat subcommands */
         CommandSpec on = CommandSpec.builder()
-                .description(Text.of("Turns CG on."))
+                .description(Text.of("Включает CG."))
                 .permission("chatsponge.command.chat.guard.on")
                 .executor(new OnCommand(plugin))
                 .build();
         CommandSpec off = CommandSpec.builder()
-                .description(Text.of("Turns CG off."))
+                .description(Text.of("Выключает CG."))
                 .permission("chatsponge.command.chat.guard.off")
                 .executor(new OffCommand(plugin))
                 .build();
         CommandSpec add = CommandSpec.builder()
-                .description(Text.of("Adds <word> to the banned list."))
+                .description(Text.of("Добавляет <word> в список \"Плохих\" слов."))
                 .permission("chatsponge.command.chat.guard.add")
                 .arguments(GenericArguments.onlyOne(GenericArguments.string(Text.of("word"))))
-                .executor(new OffCommand(plugin))
+                .executor(new AddCommand(plugin))
                 .build();
         CommandSpec remove = CommandSpec.builder()
-                .description(Text.of("Removes <word> from the banned list."))
+                .description(Text.of("Удаляет <word> из списка \"Плохих\" слов."))
                 .permission("chatsponge.command.chat.guard.remove")
                 .arguments(GenericArguments.onlyOne(GenericArguments.string(Text.of("word"))))
-                .executor(new OffCommand(plugin))
+                .executor(new RemoveCommand(plugin))
                 .build();
         CommandSpec list = CommandSpec.builder()
-                .description(Text.of("Shows list of banned words."))
+                .description(Text.of("Показывает список \"Плохих\" слов."))
                 .permission("chatsponge.command.chat.guard.list")
-                .executor(new OffCommand(plugin))
+                .executor(new ListCommand(plugin))
                 .build();
         CommandSpec guard = CommandSpec.builder()
                 .description(Text.of("Команда управления ChatGuard."))
                 .permission("chatsponge.command.chat.guard")
                 .child(on, "on")
                 .child(off, "off")
+                .child(add, "add")
+                .child(remove, "remove")
+                .child(list, "list")
                 .build();
 
         CommandSpec clear = CommandSpec.builder()
