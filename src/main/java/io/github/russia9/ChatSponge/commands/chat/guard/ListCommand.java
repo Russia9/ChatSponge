@@ -8,6 +8,11 @@ import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.text.Text;
 
+/**
+ * /chat guard list command
+ * Command to show list of banned words
+ * Aliases: /chat guard list
+ */
 public class ListCommand implements CommandExecutor {
     private final ChatSponge plugin;
 

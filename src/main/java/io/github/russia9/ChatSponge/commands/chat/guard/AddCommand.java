@@ -23,7 +23,7 @@ public class AddCommand implements CommandExecutor {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         String word = args.<String>getOne(Text.of("word")).get();
-        src.sendMessage(Text.of("INDEV "+ word));
+        src.sendMessage(Text.of("INDEV " + word));
         return CommandResult.success();
     }
 }
