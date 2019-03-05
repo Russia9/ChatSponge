@@ -17,7 +17,7 @@ public class ListCommand implements CommandExecutor {
 
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        src.sendMessage(Text.of("/Пока ничего/"));
+        src.sendMessage(Text.of("INDEV"));
         return CommandResult.success();
     }
 }
