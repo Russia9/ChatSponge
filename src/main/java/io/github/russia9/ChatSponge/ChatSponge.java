@@ -3,7 +3,7 @@ package io.github.russia9.ChatSponge;
 import io.github.russia9.ChatSponge.chatguard.ChatGuard;
 import io.github.russia9.ChatSponge.config.ChatSpongeConfig;
 import io.github.russia9.ChatSponge.config.ConfigLoader;
-import io.github.russia9.ChatSponge.managers.CommandManager;
+import io.github.russia9.ChatSponge.commands.CommandManager;
 import ninja.leaping.configurate.objectmapping.GuiceObjectMapperFactory;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;

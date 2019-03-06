@@ -1,4 +1,4 @@
-package io.github.russia9.ChatSponge.managers;
+package io.github.russia9.ChatSponge.commands;
 
 import io.github.russia9.ChatSponge.ChatSponge;
 import io.github.russia9.ChatSponge.commands.MeCommand;
