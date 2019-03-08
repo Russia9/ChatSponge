@@ -1,9 +1,9 @@
 package io.github.russia9.ChatSponge;
 
 import io.github.russia9.ChatSponge.chatguard.ChatGuard;
+import io.github.russia9.ChatSponge.commands.CommandManager;
 import io.github.russia9.ChatSponge.config.ChatSpongeConfig;
 import io.github.russia9.ChatSponge.config.ConfigLoader;
-import io.github.russia9.ChatSponge.commands.CommandManager;
 import ninja.leaping.configurate.objectmapping.GuiceObjectMapperFactory;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
@@ -15,6 +15,7 @@ import org.spongepowered.api.event.game.state.GamePostInitializationEvent;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStoppingEvent;
 import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.service.sql.SqlService;
 
 import javax.inject.Inject;
 import java.io.File;
@@ -38,6 +39,7 @@ public class ChatSponge {
     private Logger logger;
     @Inject
     private Game game;
+    private SqlService sqlService;
     private ConfigLoader configLoader;
     private CommandManager commandManager;
     private ChatSpongeConfig chatSpongeConfig;
@@ -60,6 +62,7 @@ public class ChatSponge {
     public void onGameInit(GameInitializationEvent event) {
         chatGuard = new ChatGuard(this, chatSpongeConfig.enableCG);
         Sponge.getEventManager().registerListeners(this, new ChatListener(this));
+        sqlService = Sponge.getServiceManager().provideUnchecked(SqlService.class);
         commandManager = new CommandManager(this);
         logger.info("§aChatSponge§e init");
     }
