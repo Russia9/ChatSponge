@@ -108,4 +108,8 @@ public class ChatSponge {
     public ChatGuard getChatGuard() {
         return chatGuard;
     }
+
+    public SqlService getSqlService() {
+        return sqlService;
+    }
 }
