@@ -1,9 +1,6 @@
 package io.github.russia9.ChatSponge.commands;
 
 import io.github.russia9.ChatSponge.ChatSponge;
-import io.github.russia9.ChatSponge.commands.MeCommand;
-import io.github.russia9.ChatSponge.commands.MsgCommand;
-import io.github.russia9.ChatSponge.commands.SpyCommand;
 import io.github.russia9.ChatSponge.commands.chat.ClearCommand;
 import io.github.russia9.ChatSponge.commands.chat.guard.*;
 import org.spongepowered.api.Sponge;
