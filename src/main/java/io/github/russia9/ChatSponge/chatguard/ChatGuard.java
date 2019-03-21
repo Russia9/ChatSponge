@@ -29,7 +29,7 @@ public class ChatGuard {
         boolean check = false;
         for (String s : filter) {
             if (verified.contains(s)) {
-                check = false;
+                check = true;
                 break;
             }
         }
