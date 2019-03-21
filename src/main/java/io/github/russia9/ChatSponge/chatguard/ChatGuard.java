@@ -26,7 +26,7 @@ public class ChatGuard {
     public String verify(String message, Player player) {
         String verified = message;
         String[] filter = {"хуй", "хух", "хах"};
-        boolean check = true;
+        boolean check = false;
         for (String s : filter) {
             if (verified.contains(s)) {
                 check = false;
@@ -34,7 +34,7 @@ public class ChatGuard {
             }
         }
         if (check) {
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < filter.length; i++) {
                 verified = verified.replace(filter[i], "###");
             }
         }
