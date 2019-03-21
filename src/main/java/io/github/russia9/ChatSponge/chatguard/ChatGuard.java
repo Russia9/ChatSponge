@@ -21,6 +21,7 @@ public class ChatGuard {
      * Function to verify message and delete NFSW and filthy language.
      *
      * @param message Message to check
+     * @param player  Checking player
      * @return verified and edited message
      */
     public String verify(String message, Player player) {
@@ -41,6 +42,13 @@ public class ChatGuard {
         return verified;
     }
 
+    /**
+     * Function to verify message and delete NFSW and filthy language.
+     *
+     * @param message Message to check
+     * @param player  Checking player
+     * @return verified and edited message
+     */
     public Text verify(Text message, Player player) {
         String verifed = TextSerializers.PLAIN.serialize(message);
         return TextSerializers.PLAIN.deserialize(verify(verifed, player));
