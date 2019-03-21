@@ -25,9 +25,15 @@ public class ChatGuard {
      */
     public String verify(String message, Player player) {
         String verified = message;
-        if (enable) {
-            verified = verified.replace("хуй", "###");
-            verified = verified.replace("пизда", "#####");
+        String[] filter = {"хуй", "хух", "хах"};
+        boolean check = true;
+        if (verified.contains("хуй")) check = false;
+        if (check && verified.contains("хух")) check = false;
+        if (check && verified.contains("хах")) check = false;
+        if (check) {
+            for (int i = 0; i < 3; i++) {
+                verified = verified.replace(filter[i], "###");
+            }
         }
         return verified;
     }
@@ -35,17 +41,6 @@ public class ChatGuard {
     public Text verify(Text message, Player player) {
         String verifed = TextSerializers.PLAIN.serialize(message);
         return TextSerializers.PLAIN.deserialize(verify(verifed, player));
-    }
-
-    private String replace(String string, String target, String replacement) {
-        string = string.replace(target, replacement);
-        target = target.replace("x", "х");
-        string = string.replace(target, replacement);
-        target = target.replace("y", "у");
-        string = string.replace(target, replacement);
-        target = target.replace("c", "с");
-        string = string.replace(target, replacement);
-        return string;
     }
 
     public void setEnable(boolean enable) {
