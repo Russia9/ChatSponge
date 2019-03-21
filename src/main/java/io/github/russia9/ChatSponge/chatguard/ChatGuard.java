@@ -27,9 +27,12 @@ public class ChatGuard {
         String verified = message;
         String[] filter = {"хуй", "хух", "хах"};
         boolean check = true;
-        if (verified.contains("хуй")) check = false;
-        if (check && verified.contains("хух")) check = false;
-        if (check && verified.contains("хах")) check = false;
+        for (String s : filter) {
+            if (verified.contains(s)) {
+                check = false;
+                break;
+            }
+        }
         if (check) {
             for (int i = 0; i < 3; i++) {
                 verified = verified.replace(filter[i], "###");
