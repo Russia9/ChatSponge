@@ -34,8 +34,8 @@ public class ChatGuard {
             }
         }
         if (check) {
-            for (int i = 0; i < filter.length; i++) {
-                verified = verified.replace(filter[i], "###");
+            for (String s : filter) {
+                verified = verified.replace(s, "###");
             }
         }
         return verified;
