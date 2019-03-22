@@ -27,6 +27,7 @@ public class ChatGuard {
     public String verify(String message, Player player) {
         String verified = message;
         String[] filter = {"хуй", "хух", "хах"};
+
         boolean check = false;
         for (String s : filter) {
             if (verified.contains(s)) {
