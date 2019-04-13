@@ -1,8 +1,11 @@
 package io.github.russia9.ChatSponge;
 
 import com.google.common.collect.ImmutableMap;
+import org.spongepowered.api.advancement.Advancement;
+import org.spongepowered.api.advancement.DisplayInfo;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.advancement.AdvancementEvent;
 import org.spongepowered.api.event.filter.cause.Root;
 import org.spongepowered.api.event.message.MessageChannelEvent;
 import org.spongepowered.api.event.network.ClientConnectionEvent;
@@ -97,6 +100,16 @@ public class ChatListener {
         } else {
             player.sendMessage(TextSerializers.FORMATTING_CODE.deserialize(plugin.getChatSpongeConfig().noAllowChat));
             event.setMessageCancelled(true);
+        }
+    }
+
+    @Listener
+    public void onAdvancementGrant(AdvancementEvent.Grant event, @Root Player player) {
+        if (plugin.getChatSpongeConfig().rangedMode) {
+            event.setChannel(MessageChannel.combined(
+                    MessageChannel.fixed(getNearbyPlayers(player, plugin.getChatSpongeConfig().chatRange)),
+                    MessageChannel.TO_CONSOLE)
+            );
         }
     }
 }
