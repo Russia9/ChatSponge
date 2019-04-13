@@ -26,7 +26,7 @@ public class ChatGuard {
      */
     public String verify(String message, Player player) {
         String verified = message;
-        String[] filter = {"хуй", "хух", "хах"};
+        String[] filter = {"хуй", "сука", "пизда", "пиздец", "нахуй", "пиздец", "пздц", "вагина", "пизда", "пизд"};
 
         boolean check = false;
         for (String s : filter) {
@@ -37,7 +37,11 @@ public class ChatGuard {
         }
         if (check) {
             for (String s : filter) {
-                verified = verified.replace(s, "###");
+                StringBuilder replacement = new StringBuilder();
+                for (int i = 0; i < s.length(); i++) {
+                    replacement.append("#");
+                }
+                verified = verified.replace(s, replacement.toString());
             }
         }
         return verified;
