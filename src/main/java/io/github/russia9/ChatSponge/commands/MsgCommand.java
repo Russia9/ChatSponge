@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 
 /**
  * /msg command
+ * Command to send private messages.
  * Aliases: /m /msg /tell /t /whisper /pm
  */
 public class MsgCommand implements CommandExecutor {

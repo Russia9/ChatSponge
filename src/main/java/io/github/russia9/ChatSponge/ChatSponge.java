@@ -1,8 +1,9 @@
 package io.github.russia9.ChatSponge;
 
+import io.github.russia9.ChatSponge.chatguard.ChatGuard;
+import io.github.russia9.ChatSponge.commands.CommandManager;
 import io.github.russia9.ChatSponge.config.ChatSpongeConfig;
 import io.github.russia9.ChatSponge.config.ConfigLoader;
-import io.github.russia9.ChatSponge.managers.CommandManager;
 import ninja.leaping.configurate.objectmapping.GuiceObjectMapperFactory;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
@@ -14,6 +15,7 @@ import org.spongepowered.api.event.game.state.GamePostInitializationEvent;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStoppingEvent;
 import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.service.sql.SqlService;
 
 import javax.inject.Inject;
 import java.io.File;
@@ -27,7 +29,7 @@ import java.io.File;
 @Plugin(
         id = "chatsponge",
         name = "ChatSponge",
-        version = "0.4.7", //0.4.6
+        version = "0.5-indev",
         description = "Amazing EpicCraft chat plugin",
         authors = "Russia9")
 public class ChatSponge {
@@ -37,9 +39,11 @@ public class ChatSponge {
     private Logger logger;
     @Inject
     private Game game;
+    private SqlService sqlService;
     private ConfigLoader configLoader;
     private CommandManager commandManager;
     private ChatSpongeConfig chatSpongeConfig;
+    private ChatGuard chatGuard;
 
     @Inject
     public ChatSponge(@ConfigDir(sharedRoot = false) File configDir, GuiceObjectMapperFactory factory) {
@@ -56,7 +60,9 @@ public class ChatSponge {
 
     @Listener
     public void onGameInit(GameInitializationEvent event) {
+        chatGuard = new ChatGuard(this, chatSpongeConfig.enableCG);
         Sponge.getEventManager().registerListeners(this, new ChatListener(this));
+        sqlService = Sponge.getServiceManager().provideUnchecked(SqlService.class);
         commandManager = new CommandManager(this);
         logger.info("§aChatSponge§e init");
     }
@@ -97,5 +103,13 @@ public class ChatSponge {
 
     public Game getGame() {
         return game;
+    }
+
+    public ChatGuard getChatGuard() {
+        return chatGuard;
+    }
+
+    public SqlService getSqlService() {
+        return sqlService;
     }
 }

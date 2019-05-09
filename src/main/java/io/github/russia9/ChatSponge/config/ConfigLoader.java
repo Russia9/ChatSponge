@@ -9,6 +9,9 @@ import ninja.leaping.configurate.loader.ConfigurationLoader;
 
 import java.io.File;
 
+/**
+ * Class to load ChatSponge config.
+ */
 public class ConfigLoader {
     private final ChatSponge plugin;
     private ChatSpongeConfig chatSpongeConfig;

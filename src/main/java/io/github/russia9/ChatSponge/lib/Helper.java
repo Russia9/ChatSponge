@@ -8,6 +8,9 @@ import org.spongepowered.api.text.serializer.TextSerializers;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Library class.
+ */
 public class Helper {
     public static Text getNick(Player player) {
         return Text.builder()

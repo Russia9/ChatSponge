@@ -1,8 +1,11 @@
 package io.github.russia9.ChatSponge;
 
 import com.google.common.collect.ImmutableMap;
+import org.spongepowered.api.advancement.Advancement;
+import org.spongepowered.api.advancement.DisplayInfo;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.advancement.AdvancementEvent;
 import org.spongepowered.api.event.filter.cause.Root;
 import org.spongepowered.api.event.message.MessageChannelEvent;
 import org.spongepowered.api.event.network.ClientConnectionEvent;
@@ -34,9 +37,7 @@ public class ChatListener {
             if (plugin.getChatSpongeConfig().firstJoinMessageEnabled) {
                 nick = getNick(player);
                 message = plugin.getChatSpongeConfig().firstJoinMessage;
-                event.setMessage(message.apply(ImmutableMap.of(
-                        "nick", nick
-                )));
+                event.setMessage(message.apply(ImmutableMap.of("nick", nick)));
             } else {
                 event.setMessageCancelled(true);
             }
@@ -44,9 +45,7 @@ public class ChatListener {
             if (player.hasPermission("chatsponge.joinbroadcast")) {
                 nick = getNick(player);
                 message = plugin.getChatSpongeConfig().joinMessage;
-                event.setMessage(message.apply(ImmutableMap.of(
-                        "nick", nick
-                )));
+                event.setMessage(message.apply(ImmutableMap.of("nick", nick)));
             } else {
                 event.setMessageCancelled(true);
             }
@@ -61,9 +60,7 @@ public class ChatListener {
             if (player.hasPermission("chatsponge.quitbroadcast")) {
                 nick = getNick(player);
                 message = plugin.getChatSpongeConfig().quitMessage;
-                event.setMessage(message.apply(ImmutableMap.of(
-                        "nick", nick
-                )));
+                event.setMessage(message.apply(ImmutableMap.of("nick", nick)));
             } else {
                 event.setMessageCancelled(true);
             }
@@ -75,8 +72,8 @@ public class ChatListener {
     @Listener
     public void onChatMessage(MessageChannelEvent.Chat event, @Root Player player) {
         if (player.hasPermission("chatsponge.allowchat")) {
-            Text rawMessage = event.getRawMessage();
-            String stringMessage = TextSerializers.PLAIN.serialize(rawMessage);
+            Text rawMessage = plugin.getChatGuard().verify(event.getRawMessage(), player);
+            String stringMessage = plugin.getChatGuard().verify(TextSerializers.PLAIN.serialize(rawMessage), player);
             if (player.hasPermission("chatsponge.chatformat")) stringMessage = stringMessage.replace("&", "§");
             nick = getNick(player);
             if (plugin.getChatSpongeConfig().rangedMode) {
@@ -93,20 +90,26 @@ public class ChatListener {
                             MessageChannel.fixed(getNearbyPlayers(player, plugin.getChatSpongeConfig().chatRange)),
                             MessageChannel.TO_CONSOLE)
                     );
-                    Text eventMessage = message.apply(ImmutableMap.of(
-                            "nick", nick
-                            , "message", rawMessage)).build();
+                    Text eventMessage = message.apply(ImmutableMap.of("nick", nick, "message", rawMessage)).build();
                     event.setMessage(eventMessage);
                 }
             } else {
                 message = plugin.getChatSpongeConfig().message;
-                event.setMessage(message.apply(ImmutableMap.of(
-                        "nick", nick,
-                        "message", rawMessage)));
+                event.setMessage(message.apply(ImmutableMap.of("nick", nick, "message", rawMessage)));
             }
         } else {
             player.sendMessage(TextSerializers.FORMATTING_CODE.deserialize(plugin.getChatSpongeConfig().noAllowChat));
             event.setMessageCancelled(true);
+        }
+    }
+
+    @Listener
+    public void onAdvancementGrant(AdvancementEvent.Grant event, @Root Player player) {
+        if (plugin.getChatSpongeConfig().rangedMode) {
+            event.setChannel(MessageChannel.combined(
+                    MessageChannel.fixed(getNearbyPlayers(player, plugin.getChatSpongeConfig().chatRange)),
+                    MessageChannel.TO_CONSOLE)
+            );
         }
     }
 }
