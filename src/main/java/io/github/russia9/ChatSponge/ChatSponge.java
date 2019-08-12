@@ -1,6 +1,5 @@
 package io.github.russia9.ChatSponge;
 
-import io.github.russia9.ChatSponge.chatguard.ChatGuard;
 import io.github.russia9.ChatSponge.commands.CommandManager;
 import io.github.russia9.ChatSponge.config.ChatSpongeConfig;
 import io.github.russia9.ChatSponge.config.ConfigLoader;
@@ -30,7 +29,7 @@ import java.io.File;
         id = "chatsponge",
         name = "ChatSponge",
         version = "0.5-indev",
-        description = "Amazing EpicCraft chat plugin",
+        description = "Amazing Cross-core chat plugin",
         authors = "Russia9")
 public class ChatSponge {
     private final File configDir;
@@ -43,7 +42,6 @@ public class ChatSponge {
     private ConfigLoader configLoader;
     private CommandManager commandManager;
     private ChatSpongeConfig chatSpongeConfig;
-    private ChatGuard chatGuard;
 
     @Inject
     public ChatSponge(@ConfigDir(sharedRoot = false) File configDir, GuiceObjectMapperFactory factory) {
@@ -60,7 +58,6 @@ public class ChatSponge {
 
     @Listener
     public void onGameInit(GameInitializationEvent event) {
-        chatGuard = new ChatGuard(this, chatSpongeConfig.enableCG);
         Sponge.getEventManager().registerListeners(this, new ChatListener(this));
         sqlService = Sponge.getServiceManager().provideUnchecked(SqlService.class);
         commandManager = new CommandManager(this);
@@ -103,10 +100,6 @@ public class ChatSponge {
 
     public Game getGame() {
         return game;
-    }
-
-    public ChatGuard getChatGuard() {
-        return chatGuard;
     }
 
     public SqlService getSqlService() {

@@ -32,16 +32,6 @@ public class CommandManager {
      */
     private void initCommands(ChatSponge plugin) {
         /* /chat subcommands */
-        CommandSpec on = CommandSpec.builder()
-                .description(Text.of("Включает CG."))
-                .permission("chatsponge.command.chat.guard.on")
-                .executor(new OnCommand(plugin))
-                .build();
-        CommandSpec off = CommandSpec.builder()
-                .description(Text.of("Выключает CG."))
-                .permission("chatsponge.command.chat.guard.off")
-                .executor(new OffCommand(plugin))
-                .build();
         CommandSpec add = CommandSpec.builder()
                 .description(Text.of("Добавляет <word> в список \"Плохих\" слов."))
                 .permission("chatsponge.command.chat.guard.add")
@@ -59,15 +49,6 @@ public class CommandManager {
                 .permission("chatsponge.command.chat.guard.list")
                 .executor(new ListCommand(plugin))
                 .build();
-        CommandSpec guard = CommandSpec.builder()
-                .description(Text.of("Команда управления ChatGuard."))
-                .permission("chatsponge.command.chat.guard")
-                .child(on, "on")
-                .child(off, "off")
-                .child(add, "add")
-                .child(remove, "remove")
-                .child(list, "list")
-                .build();
 
         CommandSpec clear = CommandSpec.builder()
                 .description(Text.of("Очищает чат."))
@@ -76,13 +57,6 @@ public class CommandManager {
                         GenericArguments.optional(GenericArguments.player(Text.of("player")))
                 )
                 .executor(new ClearCommand(plugin))
-                .build();
-
-        chat = CommandSpec.builder()
-                .description(Text.of("Команда управления чатом."))
-                .permission("chatsponge.command.chat.command")
-                .child(clear, "clear", "c", "cl")
-                .child(guard, "guard", "cg")
                 .build();
 
         /* separate commands */

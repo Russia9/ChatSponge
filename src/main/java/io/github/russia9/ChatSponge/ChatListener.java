@@ -1,8 +1,6 @@
 package io.github.russia9.ChatSponge;
 
 import com.google.common.collect.ImmutableMap;
-import org.spongepowered.api.advancement.Advancement;
-import org.spongepowered.api.advancement.DisplayInfo;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.advancement.AdvancementEvent;
@@ -72,8 +70,8 @@ public class ChatListener {
     @Listener
     public void onChatMessage(MessageChannelEvent.Chat event, @Root Player player) {
         if (player.hasPermission("chatsponge.allowchat")) {
-            Text rawMessage = plugin.getChatGuard().verify(event.getRawMessage(), player);
-            String stringMessage = plugin.getChatGuard().verify(TextSerializers.PLAIN.serialize(rawMessage), player);
+            Text rawMessage = event.getRawMessage();
+            String stringMessage = TextSerializers.PLAIN.serialize(rawMessage);
             if (player.hasPermission("chatsponge.chatformat")) stringMessage = stringMessage.replace("&", "§");
             nick = getNick(player);
             if (plugin.getChatSpongeConfig().rangedMode) {
