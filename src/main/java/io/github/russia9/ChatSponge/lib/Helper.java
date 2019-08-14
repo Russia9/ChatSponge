@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 /**
  * Library class.
+ *
+ * @author Russia9
  */
 public class Helper {
     public static Text getNick(Player player) {

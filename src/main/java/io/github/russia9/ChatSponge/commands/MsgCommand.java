@@ -22,6 +22,8 @@ import java.util.stream.Collectors;
  * /msg command
  * Command to send private messages.
  * Aliases: /m /msg /tell /t /whisper /pm
+ *
+ * @author Russia9
  */
 public class MsgCommand implements CommandExecutor {
     private final ChatSponge plugin;

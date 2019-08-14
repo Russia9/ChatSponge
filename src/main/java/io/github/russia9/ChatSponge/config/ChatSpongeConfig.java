@@ -11,6 +11,8 @@ import static org.spongepowered.api.text.TextTemplate.of;
 
 /**
  * ChatSponge plugin configuration.
+ *
+ * @author Russia9
  */
 @ConfigSerializable
 public class ChatSpongeConfig {

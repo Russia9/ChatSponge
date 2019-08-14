@@ -18,6 +18,8 @@ import java.util.Optional;
  * /chat clear command
  * Clears chat.
  * Aliases: /chat clear /chat cl /chat c
+ *
+ * @author Russia9
  */
 public class ClearCommand implements CommandExecutor {
     private final ChatSponge plugin;

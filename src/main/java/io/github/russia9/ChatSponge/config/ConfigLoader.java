@@ -11,6 +11,8 @@ import java.io.File;
 
 /**
  * Class to load ChatSponge config.
+ *
+ * @author Russia9
  */
 public class ConfigLoader {
     private final ChatSponge plugin;
