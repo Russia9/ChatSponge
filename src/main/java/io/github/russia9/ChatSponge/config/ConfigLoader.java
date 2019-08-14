@@ -21,7 +21,12 @@ public class ConfigLoader {
     public ConfigLoader(ChatSponge plugin) {
         this.plugin = plugin;
         if (!plugin.getConfigDir().exists()) {
-            plugin.getConfigDir().mkdirs();
+            plugin.getLogger().info("Config dir not found");
+            if (plugin.getConfigDir().mkdirs()) {
+                plugin.getLogger().info("Created config dir");
+            } else {
+                plugin.getLogger().error("Error with creating config dir");
+            }
         }
     }
 
@@ -29,7 +34,12 @@ public class ConfigLoader {
         try {
             File file = new File(plugin.getConfigDir(), "config.conf");
             if (!file.exists()) {
-                file.createNewFile();
+                plugin.getLogger().info("Config file not found");
+                if (file.createNewFile()) {
+                    plugin.getLogger().info("Created config file");
+                } else {
+                    plugin.getLogger().error("Error with creating config file");
+                }
             }
             ConfigurationLoader<CommentedConfigurationNode> loader = HoconConfigurationLoader.builder().setFile(file).build();
             CommentedConfigurationNode config = loader.load(ConfigurationOptions.defaults().setObjectMapperFactory(plugin.getFactory()).setShouldCopyDefaults(true));
