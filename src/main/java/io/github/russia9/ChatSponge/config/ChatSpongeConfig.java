@@ -20,11 +20,11 @@ public class ChatSpongeConfig {
     public final boolean rangedMode = true;
     @Setting("Chat range")
     public final int chatRange = 100;
-    @Setting("First Join")
+    @Setting("First Join broadcast")
     public final boolean firstJoinMessageEnabled = true;
-    @Setting("Join")
+    @Setting("Join broadcast")
     public final boolean joinMessageEnabled = true;
-    @Setting("Quit")
+    @Setting("Quit broadcast")
     public final boolean quitMessageEnabled = true;
     @Setting("First Join Message")
     public final TextTemplate firstJoinMessage = of(

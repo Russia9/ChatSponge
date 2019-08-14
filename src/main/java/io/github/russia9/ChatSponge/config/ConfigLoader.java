@@ -37,7 +37,7 @@ public class ConfigLoader {
             loader.save(config);
             return true;
         } catch (Exception e) {
-            plugin.getLogger().error("Could not load config.", e);
+            plugin.getLogger().error("Could not load config ", e);
             return false;
         }
     }

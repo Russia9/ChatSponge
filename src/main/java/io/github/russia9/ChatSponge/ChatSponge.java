@@ -25,8 +25,7 @@ import java.io.File;
  * @author Russia9
  */
 
-@Plugin(
-        id = "chatsponge",
+@Plugin(id = "chatsponge",
         name = "ChatSponge",
         version = "0.5-indev",
         description = "Amazing Cross-core chat plugin",
