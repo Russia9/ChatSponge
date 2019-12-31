@@ -1,6 +1,7 @@
-package io.github.russia9.ChatSponge;
+package io.github.russia9.ChatSponge.listeners;
 
 import com.google.common.collect.ImmutableMap;
+import io.github.russia9.ChatSponge.ChatSponge;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.advancement.AdvancementEvent;
@@ -25,7 +26,7 @@ public class ChatListener {
     private TextTemplate message;
     private Text nick;
 
-    ChatListener(ChatSponge plugin) {
+    public ChatListener(ChatSponge plugin) {
         this.plugin = plugin;
     }
 

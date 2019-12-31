@@ -44,6 +44,13 @@ public class ChatSpongeConfig {
 
     @Setting("No allow chat message")
     public final String noAllowChat = "[&4Epic&6Craft&7] &cИзвините, но у вас нет прав на написание сообщений здесь";
+    @Setting("No bad words")
+    public final String noBadWords = "[&4Epic&6Craft&7] &cМатериться плохо!";
+
+    @Setting("ChatGuard Level")
+    public final int chatGuardLevel = 0;
+
+
     public final TextTemplate privateMessageSender = of(
             TextColors.GOLD, TextSerializers.FORMATTING_CODE.deserialize(" &6[&cЯ &6-> "), arg("nick"), TextSerializers.FORMATTING_CODE.deserialize("&6] "), TextColors.RESET, arg("message"));
     @Setting("Enabled")

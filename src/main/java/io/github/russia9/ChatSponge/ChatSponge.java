@@ -3,6 +3,9 @@ package io.github.russia9.ChatSponge;
 import io.github.russia9.ChatSponge.commands.CommandManager;
 import io.github.russia9.ChatSponge.config.ChatSpongeConfig;
 import io.github.russia9.ChatSponge.config.ConfigLoader;
+import io.github.russia9.ChatSponge.guard.ChatGuard;
+import io.github.russia9.ChatSponge.listeners.ChatListener;
+import io.github.russia9.ChatSponge.listeners.GuardListener;
 import ninja.leaping.configurate.objectmapping.GuiceObjectMapperFactory;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
@@ -37,6 +40,7 @@ public class ChatSponge {
     private Logger logger;
     @Inject
     private Game game;
+    private ChatGuard chatGuard;
     private SqlService sqlService;
     private ConfigLoader configLoader;
     private CommandManager commandManager;
@@ -58,6 +62,7 @@ public class ChatSponge {
     @Listener
     public void onGameInit(GameInitializationEvent event) {
         Sponge.getEventManager().registerListeners(this, new ChatListener(this));
+        Sponge.getEventManager().registerListeners(this, new GuardListener(this));
         sqlService = Sponge.getServiceManager().provideUnchecked(SqlService.class);
         commandManager = new CommandManager(this);
         logger.info("§aChatSponge§e init");
@@ -65,6 +70,7 @@ public class ChatSponge {
 
     @Listener
     public void onPostInit(GamePostInitializationEvent event) {
+        chatGuard = new ChatGuard(this);
         logger.info("§aChatSponge§e post-init");
     }
 
@@ -95,6 +101,10 @@ public class ChatSponge {
 
     public ConfigLoader getConfigLoader() {
         return configLoader;
+    }
+
+    public ChatGuard getChatGuard() {
+        return chatGuard;
     }
 
     public Game getGame() {
